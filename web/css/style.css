@@ -1,0 +1,123 @@
+/*
+ * NAV BAR STYLING
+ */
+
+.nav.nav-tabs .nav-options-right{
+	float: right;
+	right: 10px;
+}
+}
+/*
+ * HOME OPTIONS STYLING
+ */
+.under-construction {
+	font-size: 40px;
+	position: fixed;
+	padding: 100px 100px 200px 300px;
+}
+.under-construction-sign {
+	position: fixed;
+	padding: 150px 400px 100px 100px;
+}
+/*
+ * GAME OPTIONS STYLEING
+ */
+#games-holder{
+	
+}
+#games-holder #game-list-holder {
+	width: 20%;
+	height: 100%;
+	position: relative;
+	float: left;
+}
+#games-holder #current-game-holder{
+	width: 80%;
+	height: 100%;
+	position: relative;
+	float: right;
+}
+#games-holder #current-game-holder #new-game-holder{
+	display: none;
+	position: relative;
+	float: left;
+}
+#games-holder #current-game-holder #new-game-holder .create-game-error-holder{
+	display: none;
+}
+#games-holder #current-game-holder #invited-holder{
+	display: none;
+	position: relative;
+	float: left;
+}
+#games-holder #current-game-holder #queue-holder{
+	display: none;
+	position: relative;
+	float: left;
+}
+#games-holder #current-game-holder #invite-holder{
+	display: none;
+	position: relative;
+	float: left;
+}
+#games-holder #current-game-holder #game-playspace-holder{
+	width:100%;
+	display: none;
+	position: relative;
+	float: left;
+}
+#game-playspace-holder #tic-tac-toe-game-holder{
+	//height: 100%;
+	//width: 100%;
+}
+#game-playspace-holder #tic-tac-toe-game-holder #tic-tac-toe-board-holer {
+	//width: 100%;
+	height: 80%;
+}
+#game-playspace-holder #tic-tac-toe-game-holder .tic-tac-toe-column{
+	
+	width: 30%;
+	position: relative;
+	float: left;
+}
+#game-playspace-holder #tic-tac-toe-board-holer .tic-tac-toe-square{
+	height: 30%;
+	width: 100%;
+	position: relative;
+	text-align: center;
+	font-size: 25px;
+	border-width: 1px;
+	border-color: black;
+}
+#game-playspace-holder #tic-tac-toe-board-holer #tic-tac-toe-square-0-0{
+	position: relative;
+	border-right: solid;
+	border-bottom: solid;
+}
+#game-playspace-holder #tic-tac-toe-board-holer #tic-tac-toe-square-0-1{
+	border-right: solid;
+	border-bottom: solid;
+}
+#game-playspace-holder #tic-tac-toe-board-holer #tic-tac-toe-square-0-2{
+	border-bottom: solid;
+}
+#game-playspace-holder #tic-tac-toe-board-holer #tic-tac-toe-square-1-0{
+	border-right: solid;
+	border-bottom: solid;
+}
+#game-playspace-holder #tic-tac-toe-board-holer #tic-tac-toe-square-1-1{
+	border-right: solid;
+	border-bottom: solid;
+}
+#game-playspace-holder #tic-tac-toe-board-holer #tic-tac-toe-square-1-2{
+	border-bottom: solid;
+}
+#game-playspace-holder #tic-tac-toe-board-holer #tic-tac-toe-square-2-0{
+	border-right: solid;
+}
+#game-playspace-holder #tic-tac-toe-board-holer #tic-tac-toe-square-2-1{
+	border-right: solid;
+}
+#game-playspace-holder #tic-tac-toe-board-holer #tic-tac-toe-square-2-0{
+
+}

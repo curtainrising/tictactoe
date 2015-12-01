@@ -1,0 +1,4 @@
+exports.gameQueues = {
+	"rankedTicTacToe":{},
+	"unrankedTicTacToe":{}
+};

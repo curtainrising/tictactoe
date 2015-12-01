@@ -1,0 +1,5 @@
+exports.playerDecks = {
+	decks: [
+		String
+	]
+};

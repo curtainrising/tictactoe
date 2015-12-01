@@ -1,0 +1,143 @@
+<div id="games-holder">
+	<div id="game-list-holder">
+		<button class="btn btn-small" type="button" id="new-game-button">
+			New Game
+		</button>
+		<div>
+			<span class="game-list-title">Queues you are waiting in</span>
+			<ul id="game-queue-list-holder" class="list-group">
+			
+			</ul>
+		</div>
+		<div>
+			<span class="game-list-title">Invites you have sent</span>
+			<ul id="pending-game-list-holder" class="list-group">
+			
+			</ul>
+		</div>
+		
+		<div id="pending-invited-game-list-holder">
+			<span class="game-list-title">Invites you have received</span>
+			<ul id="pending-invited-game-list-holder" class="list-group">
+			
+			</ul>
+		</div>
+		<div id="current-game-list-holder">
+			<spanclass="game-list-title">current games</span>
+			<ul id="current-game-list-holder" class="list-group">
+			
+			</ul>
+		</div>
+		<div id="finished-game-list-holder">
+			<span class="game-list-title"> finished games</span>
+			<ul id="finished-game-list-holder" class="list-group">
+			
+			</ul>
+		</div>
+	</div>
+	<div id="current-game-holder">
+		<div id="new-game-holder">
+			<div class="create-game-error-holder">
+				<span id="create-game-error"></span>
+			</div>
+			<div class="create-game-type-holder">
+				<label for "create-game-type">game type</label>
+				<select id="create-game-type">
+					<option class="game-type-option" value="empty"></option>
+					<option class="game-type-option" value="tictactoe">tic tac toe</option>
+				</select>
+			</div>
+			<div class="create-game-opponent-type-holder">
+				<label for "create-game-opponent-type">game type</label>
+				<select id="create-game-opponent-type">
+					<option class="opponent-type-option" value="player">a specific player</option>
+					<!--<option class="opponent-type-option" value="computer">computer</option>-->
+					<option class="opponent-type-option" value="queue">join queue</option>
+				</select>
+			</div>
+			<div class="create-game-name-holder">
+				<label for"create-game-name">game name</label>
+				<input type="text" name="gameName" class="game-name" id="create-game-name">
+			</div>
+			<div id="create-game-chosen-opponents-holder">
+				
+			</div>
+			<div class="create-game-opponent-holder">
+				<label for"create-game-opponent">opponent id</label>
+				<input type="text" name="gameName" class="game-name" id="create-game-opponent">
+			</div>
+			<div id="create-game-possible-opponents-holder">
+				
+			</div>
+			<div class="create-game-ranked-choice-holder">
+				<input type="radio" name="create-game-ranked-choice" value="ranked" checked>ranked
+				<input type="radio" name="create-game-ranked-choice" value="unranked">unranked
+			</div>
+			<button class="btn btn-small" type="button" id="save-new-game-button">
+				Send Game Challenge
+			</button>
+		</div>
+		<div id="queue-holder">
+			<div id="queue-game-type-holder">
+				
+			</div>
+			<div>
+				ranked: <span id="queue-game-ranked-holder"></span>
+			</div>
+			<div id="queue-display-opponents-holder">
+				Opponents:
+				<div id="queue-display-opponents">
+					
+				</div>
+			</div>
+			<button class="btn btn-small" type="button" id="leave-queue-button">
+				leave Queue
+			</button>
+		</div>
+		<div id="invite-holder">
+			<div id="invite-display-opponents-holder">
+				Opponents:
+				<div id="invite-display-opponents">
+					
+				</div>
+			</div>
+			<div>
+				<span id="invite-display-game-type"></span>
+			</div>
+			<div>
+				<span>Sent at: </span>
+				<span id="invite-display-time"></span>
+			</div>
+			<button class="btn btn-small" type="button" id="cancel-game-invite-button">
+				Cancel Challenge
+			</button>
+		</div>
+		<div id="invited-holder">
+			<div>
+				<span id="invited-display-inviter"></span>
+			</div>
+			<div id="invited-display-opponents-holder">
+				Opponents:
+				<div id="invited-display-opponents">
+					
+				</div>
+			</div>
+			<div>
+				<span id="invited-display-game-type"></span>
+			</div>
+			<div>
+				<span>Sent at: </span>
+				<span id="invited-display-time"></span>
+			</div>
+			<button class="btn btn-small" type="button" id="accept-game-invite-button">
+				Accept
+			</button>
+			<button class="btn btn-small" type="button" id="deny-game-invite-button">
+				Deny
+			</button>
+		</div>
+		<div id="game-playspace-holder">
+			
+		</div>
+	</div>
+</div>
