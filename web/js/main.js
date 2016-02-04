@@ -41,7 +41,7 @@ var AppRouter = Backbone.Router.extend({
 				"access-token": authToken
 			},
 			dataType: "json",
-			url : app.apiUrl() + "/authenticate",
+			url : this.apiUrl() + "/authenticate",
 			success: function(data) {
 				self.user = new userModel(data);
 				self.logIn();

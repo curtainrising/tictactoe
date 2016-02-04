@@ -6,7 +6,7 @@ window.SignUpView = Backbone.View.extend({
 			type: "GET",
 			contentType: 'application/json',
 			dataType: "json",
-			url : app.apiUrl() + "/player/signlogauth",
+			url : app.apiUrl() + "/signlogauth",
 			success: function(data) {
 				self.salt = data.salt;
 				return self;

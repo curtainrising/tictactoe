@@ -69,7 +69,7 @@ exports.createGame = function(data) {
 	return playerModule.findPlayers({uids:players}, null, {"gameStats":true}).then(function(playerGameData){
 		var playerGameStats = {};
 		for(var i in playerGameData){
-			playerGameStats[playerGameData._id] = playerGameData[i].gameStats;
+			playerGameStats[playerGameData[i]._id] = playerGameData[i].gameStats[data.gameType];
 		}
 		var newGameData = gameData.setupNewGameData(data, playerGameStats);
 		return newGame(newGameData).then(function(gameObject){

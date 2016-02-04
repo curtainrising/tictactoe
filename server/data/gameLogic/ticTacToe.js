@@ -228,8 +228,13 @@ exports.setupNewGameData = function(data, playerGameStats){
 	
 	gameData.playersById[playerX] = 0;
 	gameData.playersById[playerY] = 1;
-	gameData.playerScores[playerX] = playerGameStats[playerX][gameData.type]['score'];
-	gameData.playerScores[playerY] = playerGameStats[playerY][gameData.type]['score'];
+	if(playerGameStats[playerX][gameData.type]){
+		gameData.playerScores[playerX] = playerGameStats[playerX][gameData.type]['score'];
+		gameData.playerScores[playerY] = playerGameStats[playerY][gameData.type]['score'];
+	} else {
+		gameData.playerScores[playerX] = 0;
+		gameData.playerScores[playerY] = 0;
+	}
 	gameData.acceptedDraw[playerX] = false;
 	gameData.acceptedDraw[playerY] = false;
 	gameData.surrendered[playerX] = false;

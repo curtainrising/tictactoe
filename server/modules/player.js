@@ -13,7 +13,7 @@ var setupPlayerData = function(data){
 		var playerId = playerObject.id;
 		var playerGamesData = {
 			"_id": new ObjectId(playerId),
-			"games": [deckObject.id]
+			"games": []
 		};
 		return utilities.getCollection('playerGames').insert(playerGamesData).then(function(playerGamesResponse){
 			return playerData;
@@ -80,7 +80,8 @@ var find = function(data, inOpt){
 	if(data.partialUsername){
 		expectMultiple = true;
 		type = "find";
-		query['username'] = new RegExp("^" + data.partialUsername, "i");
+		var search = {"username": new RegExp("^" + data.partialUsername, "i")};
+		queries.push(search);
 		options['limit'] = inOpt.limit || 10;
 	}
 	if(data.username){

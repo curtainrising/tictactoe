@@ -165,15 +165,15 @@ window.TicTacToeBoardView = Backbone.View.extend({
 		if(this.numberOfMoves <= 4){
 			return false;
 		}
-		if(this.numberOfMoves >= 9){
-			this.catsGame();
-			return true;
-		}
 		if(this.hasWinner) {
 			return true;
 		}
 		if(this.model.attributes.winner != ""){
 			this.win(this.model.attributes.winString);
+			return true;
+		}
+		if(this.numberOfMoves >= 9){
+			this.catsGame();
 			return true;
 		}
 		return false;

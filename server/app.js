@@ -22,7 +22,7 @@ app.all('*', function(req, res, next) {
 //do not need player auth tokens
 //supplies random key for hashing password
 //ONLY SLIGHTLY MORE SECURE THAN PLAIN TEXT PASSWORD
-app.get('/signlogauth', function(req, res){
+app.get('/signlogauth', function(req, res){console.log('here');
 	var salt = utilities.createRandomString(15);
 	res.jsonp({salt: salt});
 });
@@ -79,9 +79,9 @@ app.put('/player/:uid/game/:gid/surrender', game.surrender);
 app.put('/player/:uid/game/:gid/draw', game.draw);
 
 
-var server = app.listen(8081);
+var server = app.listen(8082);
 socketInterface.start(server);
 utilities.rabbitMQStart().then(function(){
 	queueModule.setupRabbitConsumers();
 });
-console.log('listening on port 8081');
+console.log('listening on port 8082');

@@ -211,6 +211,9 @@ window.GameView = Backbone.View.extend({
 		$("#game-playspace-holder", this.$el).css("display","none");
 	},
 	debounceGetUsersFromPartialString: _.debounce(function(event){
+		if(event.currentTarget.value == "" || event.currentTarget.value == ''){
+			return;
+		}
 		if(this.newGameUserSearching){
 			this.newGameUserSearchCurrentText = event.currentTarget.value;
 			return;
@@ -248,6 +251,12 @@ window.GameView = Backbone.View.extend({
 						$("#create-game-possible-opponents-holder").append(self.newGameUserListTemplate(newUserData));
 					}
 				}
+				self.newGameUserSearching = false;
+				if(self.newGameUserSearchCurrentText != partialString){
+					self.getUsersFromPartialString(partialString);
+				}
+			},
+			error : function(){
 				self.newGameUserSearching = false;
 				if(self.newGameUserSearchCurrentText != partialString){
 					self.getUsersFromPartialString(partialString);

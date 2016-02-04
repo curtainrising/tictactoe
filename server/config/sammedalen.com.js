@@ -1,5 +1,5 @@
 module.exports = {
-	port : 8081,
+	port : 8082,
 	appSecret : "392a2e999862e2e793fc",
 	passwordSecret : "6bdd45ea236d398984b3",
 	passwordHashLength: 15,
