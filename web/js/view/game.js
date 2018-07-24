@@ -60,11 +60,14 @@ window.GameView = Backbone.View.extend({
 		myGames.fetch({
 			success: function(gameModels, allGamesData){
 				for(var i in allGamesData){
-					if(allGamesData[i].winner == "" && Boolean(allGamesData[i].draw) == false){
-						self.addCurrentGame(allGamesData[i]);
-					} else {
-						self.addFinishedGame(allGamesData[i]);
+					if(allGamesData[i]){
+						if(allGamesData[i].winner == "" && Boolean(allGamesData[i].draw) == false){
+							self.addCurrentGame(allGamesData[i]);
+						} else {
+							self.addFinishedGame(allGamesData[i]);
+						}
 					}
+					
 				}
 			}
 		});

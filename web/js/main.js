@@ -12,7 +12,8 @@ var AppRouter = Backbone.Router.extend({
 		} else {
 			this.setupLoggedOutHome();
 		}
-		
+		this.height = $(window).height();
+		console.log(this.height);
 	},
 	setupLoggedOutHome: function(){
 		this.homeView = new HomeLoggedOutView();

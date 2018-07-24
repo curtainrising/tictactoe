@@ -39,7 +39,10 @@ window.HomeLoggedOutView = Backbone.View.extend({
 			this.currentMainView = $("#log-in", this.$el);
 			this.currentMainView.css("display","block");
 		}
-			this.currentNavButton.removeClass('active');
+		this.currentNavButton.removeClass('active');
+		var top = (app.height/2) - ($("#log-in", this.$el).height()/2);
+		console.log(top);
+		$("#sign-up-log-in").css("top", top);
 	},
 	setupSignUp: function(event) {
 		$("#sign-up-log-in").css('display','block');
@@ -55,6 +58,9 @@ window.HomeLoggedOutView = Backbone.View.extend({
 			this.currentMainView = $("#sign-up", this.$el);
 			this.currentMainView.css("display","block");
 		}
-			this.currentNavButton.removeClass('active');
+		this.currentNavButton.removeClass('active');
+		var top = (app.height/2) - ($("#sign-up", this.$el).height()/2);
+		console.log(top);
+		$("#sign-up-log-in").css("top", top);
 	}
 });

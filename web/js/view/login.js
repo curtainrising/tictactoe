@@ -15,6 +15,7 @@ window.LogInView = Backbone.View.extend({
 	},
 	render: function () {
 		this.$el.append(this.template());
+		
 		return this;
 	},
 	
@@ -27,7 +28,12 @@ window.LogInView = Backbone.View.extend({
 		$("#log-in-error-holder", this.$el).css("display","none");
 		$("#log-in-error-holder", this.$el).html("");
 	},
+	setError: function(error){
+		$("#log-in-error-holder", this.$el).css("display","block");
+			$("#log-in-error-holder", this.$el).html(error);
+	},
 	login: function(event) {
+		var self = this;
 		var password = $("#password-log-in-input", this.$el).val();
 		var username = $("#username-log-in-input", this.$el).val();
 		var error = "";
@@ -53,6 +59,10 @@ window.LogInView = Backbone.View.extend({
 			success: function(data) {
 				app.user = new userModel(data);
 				app.logIn();
+			},
+			error: function(error){
+				console.log(error);
+				self.setError(error.responseJSON.message);
 			}
 		});
 	}

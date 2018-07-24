@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Q = require('q');
 
 var MongoDB = function () {
-	this.db = mongoose.connect('mongodb://localhost/mydb');
+	this.db = mongoose.connect('mongodb://localhost/textdb');
 	return this;
 };
 
