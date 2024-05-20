@@ -2,7 +2,20 @@ var mongoose = require('mongoose');
 var Q = require('q');
 
 var MongoDB = function () {
-	this.db = mongoose.connect('mongodb://localhost/textdb');
+  try {
+    this.db = mongoose.connect(
+      process.env.MONGO_URL || 'mongodb://localhost:27017/textdb',
+      {
+        "auth": {
+          "authSource": "admin"
+        },
+        "user": process.env.MONGO_USER,
+        "pass": process.env.MONGO_PASS,
+      }
+    );
+  } catch (error) {
+    throw error
+  }
 	return this;
 };
 

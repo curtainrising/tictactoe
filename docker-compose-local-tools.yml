@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:3.2.21
+    ports:
+      - 27017:27017 # mongodb port
+      - 8081:8081 # mongo express port
+      - 6379:6379 # redis port
+      - 15672:15672 # rabbitmq ui port
+      - 5672:5672 # rabbitmq api port
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+  mongo-express:
+    image: mongo-express
+    network_mode: service:mongo
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017
+  redis:
+    image: redis
+    network_mode: service:mongo
+  rabbitmq:
+    image: rabbitmq:3-management
+    network_mode: service:mongo

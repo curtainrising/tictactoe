@@ -2,6 +2,7 @@ window.LogInView = Backbone.View.extend({
 
 	initialize: function() {
 		var self = this;
+    console.log('here');
 		return $.ajax({
 			type: "GET",
 			contentType: 'application/json',

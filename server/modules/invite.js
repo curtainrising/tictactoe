@@ -76,14 +76,16 @@ exports.updateInvite = function(uid, iid, data){
 		if(anOpponent == false){
 			throw new Error("not invited to this game");
 		}
-		return utilities.getCollection('gameInvites').findOneAndModify(query, inviteData).then(function(inviteDataObjectUpdated){
-			if(allAccepted == false){
-				if(inviteData.inviter){
-					utilities.socketEmit(inviteData.inviter, 'update invite', iid);
-				}
-				utilities.socketEmitMultiple(opponents, 'update invite', iid);
-			}
-			return inviteDataObjectUpdated;
+		return utilities.getCollection('gameInvites').findOneAndModify(query, inviteData).then(function(){
+      return utilities.getCollection('gameInvites').findOne(query,).then(function(inviteDataObjectUpdated){
+        if(allAccepted == false){
+          if(inviteData.inviter){
+            utilities.socketEmit(inviteData.inviter, 'update invite', iid);
+          }
+          utilities.socketEmitMultiple(opponents, 'update invite', iid);
+        }
+        return inviteDataObjectUpdated;
+      });
 		});
 	});
 };

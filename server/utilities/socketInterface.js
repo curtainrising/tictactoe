@@ -1,7 +1,15 @@
-var io = require('socket.io');
+var { Server } = require('socket.io');
+var cors = require('cors');
 
 start = function(server) {
-	this.socket = io.listen(server || 8080);
+
+  this.socket = new Server(server, {
+    allowEIO3: true,
+    cors: {
+      origin: true,
+      credentials: true,
+    }
+  });
 	var self = this;
 	this.socket.sockets.on('connection', function (socket) {
 		console.log('A new user connected!');

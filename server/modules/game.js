@@ -41,8 +41,10 @@ var findGames = function(data, uid){
 };
 var updateGames = function(gid, updatedData){
 	query = {"_id":new ObjectId(gid)};
-	return utilities.mongoDB('games', 'findOneAndModify', query, updatedData).then(function(updatedGameObject){
-			return updatedGameObject.toObject();
+	return utilities.mongoDB('games', 'findOneAndModify', query, updatedData).then(function(){
+		return utilities.mongoDB('games', 'findOne', query).then(function(updatedGameObject){	
+      return updatedGameObject.toObject();
+    });
 	});
 };
 var newGame = function(gameData){
@@ -74,7 +76,7 @@ exports.createGame = function(data) {
 		var newGameData = gameData.setupNewGameData(data, playerGameStats);
 		return newGame(newGameData).then(function(gameObject){
 			return playerModule.addAllPlayersGame(newGameData.players, gameObject._id).then(function(playerGamesData){
-				gameData.getGame(gameObject._id, gameObject);
+        gameData.getGame(gameObject._id, gameObject);
 				if(data.inviter){
 					utilities.socketEmit(data.inviter, 'create game', gameObject);
 				}
@@ -98,8 +100,7 @@ exports.findGamesByPlayerId = function(uid) {
 exports.draw = function(uid, gid){
 	var query = {"_id": new ObjectId(gid)};
 	return findGames({"gid":gid}, uid).then(function(gameDataObject){
-		if(gameObject){
-			var gameDataObject = gameObject.toObject();
+		if(gameDataObject){
 			var game = gameData.getGame(gid, gameDataObject);
 			game.draw(uid);
 			var currentGameData = game.getData();

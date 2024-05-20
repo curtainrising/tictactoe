@@ -21,7 +21,7 @@ User.prototype.login = function(id){
 User.prototype.updatePlayerData = function(data){
 	for(var i in data){
 			if(this.data[i]){
-				this.data[i] == data[i];
+				this.data[i] = data[i];
 			}
 		}
 };

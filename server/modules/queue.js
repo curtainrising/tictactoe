@@ -5,6 +5,7 @@ var utilities = require("../utilities/utilities"),
 	gameModule = require("../modules/game"),
 	userData = require("../data/user"),
 	queueData = require("../data/queue"),
+  gameQueuesSchema = require('../api/schemas/gameQueues');
 	Q = require('q'),
 	config = require("../config/sammedalen.com");
 
@@ -73,8 +74,10 @@ exports.leavePlayerGameQueue = function(uid, gqid){
 				return saveGameQueue().then(function(){
 					playerGameQueueData.opponents = newOpponents;
 					var query = {"_id":new ObjectId(gqid)};
-					return utilities.getCollection("playerGameQueues").findOneAndModify(query, playerGameQueueData).then(function(playerGameQueueObject){
-						return playerGameQueueObject;
+					return utilities.getCollection("playerGameQueues").findOneAndModify(query, playerGameQueueData).then(function(){
+            return utilities.getCollection('playerGameQueues').find(query).then(function(playerGameQueueObject){
+						  return playerGameQueueObject[0];
+            });
 					});
 				});
 			});
@@ -92,7 +95,7 @@ var addOpponentToPlayerGameQueue = function(userId, gqid){
 	return getPlayerGameQueue(gqid).then(function(playerGameQueuData){
 		playerGameQueueData.opponents.push(userId);
 		var query = {"_id":gqid};
-		return utilities.getCollection("PlayerGameQueues").findOneAndModify(query,playerGameQueueData).then(function(playerGameQueueObject){
+		return utilities.getCollection("PlayerGameQueues").findOneAndModify(query, playerGameQueueData).then(function(playerGameQueueObject){
 			return playerGameQueueObject.id;
 		});
 	});
@@ -177,7 +180,7 @@ var determineScore = function(message){
 		//var gameDataObject = gameObject.toObject();
 	return gameModule.findGames({"gid":gameId}).then(function(gameDataObject){
 		var ranked = gameDataObject.ranked;
-		return playerModule.find({"uid":uid}).then(function(playerData){
+		return playerModule.find({"uid":userId}).then(function(playerData){
 			var gameStats = playerData.gameStats;
 			var oldScore = gameStats[gameDataObject.type].score;
 			gameStats = queueData.determineScore(userId, ranked, gameDataObject, gameStats);
@@ -197,8 +200,15 @@ var determineScore = function(message){
 };
 var setupGameQueue = function(){
 	return utilities.getCollection('gameQueues').findAll().then(function(queueObject){
-		var queueDataObject = queueObject[0].toObject();
-		queueData.setupGameQueues(queueDataObject);
+    if (!queueObject || !queueObject[0]) {
+      utilities.getCollection("gameQueues").insert(gameQueuesSchema.gameQueues).then(function(insertedQueueObject){
+        var queueDataObject = insertedQueueObject.toObject();
+        queueData.setupGameQueues(queueDataObject);
+      });
+    } else {
+      var queueDataObject = queueObject[0].toObject();
+      queueData.setupGameQueues(queueDataObject);
+    }
 	});
 };
 var saveGameQueue = function(){

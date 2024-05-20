@@ -82,7 +82,7 @@ var find = function(data, inOpt){
 		type = "find";
 		var search = {"username": new RegExp("^" + data.partialUsername, "i")};
 		queries.push(search);
-		options['limit'] = inOpt.limit || 10;
+		options['limit'] = 10;
 	}
 	if(data.username){
 		type = "findOne";
@@ -149,12 +149,14 @@ exports.findPlayers = function(data, options, requestedData){
 //only to be use internally
 exports.updatePlayerData = function(uid, data){
 	var query = {"_id":new ObjectId(uid)};
-	return find({uid:uid}).then(function(){
-		var user = userData.getUser(uid);
+	return find({uid:uid}).then(function(tempData){
+		var user = userData.getUser(uid, tempData);
 		user.updatePlayerData(data);
 		//return utilities.getCollection('players').findOneAndModify(query, user.data).then(function(currentPlayerObject){
-		return utilities.mongoDB('players', 'findOneAndModify', query, user.data).then(function(currentPlayerObject){
-			return currentPlayerObject[0];
+		return utilities.mongoDB('players', 'findOneAndModify', query, user.data).then(function(){
+      return utilities.mongoDB('players', 'findOne', query).then(function(currentPlayerObject){
+			  return currentPlayerObject[0];
+      });
 		}).fail(function(err){
 			console.log(err);
 		});
@@ -176,8 +178,10 @@ var addPlayerGame = function(uid, gid){
 	return utilities.getCollection('playerGames').find(playerQuery).then(function(playerObject){
 		var playerData = playerObject[0].toObject();
 		playerData.games.push(gid);
-		return utilities.getCollection('playerGames').findOneAndModify(playerQuery,playerData).then(function(worked){
-			return worked;
+		return utilities.getCollection('playerGames').findOneAndModify(playerQuery,playerData).then(function(){
+      return utilities.getCollection('playerGames').findOne(playerQuery).then(function(worked){
+			  return worked;
+      });
 		});
 	});
 };

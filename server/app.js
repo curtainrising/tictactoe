@@ -1,4 +1,5 @@
 var express = require('express'),
+  { createServer } = require("http");
 	bodyParser = require("body-parser"),
 	player = require('./api/routes/player'),
 	game = require("./api/routes/game"),
@@ -7,6 +8,7 @@ var express = require('express'),
 	queueModule = require("./modules/queue");
 	socketInterface = require("./utilities/socketInterface"),
 	utilities = require("./utilities/utilities");
+  cors = require('cors');
 //mongo.getInstance();
 
 var app = express();
@@ -18,6 +20,7 @@ app.all('*', function(req, res, next) {
 	res.header('Content-Type', "application/json; charset=utf-8");
 	next();
 });
+app.use(cors()) // comment this out to provoke CORS error
 
 //do not need player auth tokens
 //supplies random key for hashing password
@@ -79,9 +82,11 @@ app.put('/player/:uid/game/:gid/surrender', game.surrender);
 app.put('/player/:uid/game/:gid/draw', game.draw);
 
 
-var server = app.listen(8082);
-socketInterface.start(server);
+var httpServer = createServer(app);
+socketInterface.start(httpServer);
 utilities.rabbitMQStart().then(function(){
+  console.log('rabbitmq-connected')
 	queueModule.setupRabbitConsumers();
 });
+httpServer.listen(8082);
 console.log('listening on port 8082');

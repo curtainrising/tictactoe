@@ -1,0 +1,27 @@
+{
+	"name": "tictactoapi",
+	"description": "modules for sammedalen",
+	"author": "Sam",
+	"engine": "node == 18.16.0",
+	"version": "0.0.1",
+	"private": true,
+  "scripts": {
+    "start-dev": "MONGO_USER=root MONGO_PASS=example nodemon app.js"
+  },
+	"dependencies": {
+		"amqplib": "^0.10.4",
+		"body-parser": "1.13.3",
+		"express": "3.3.3",
+		"express-validator": "0.7.0",
+		"http": "^0.0.1-security",
+		"jsonwebtoken": "^9.0.2",
+		"mongoose": "^4.3.0",
+		"mongoose-aliasfield": "0.0.2",
+		"q": "0.9.7",
+		"sjcl": "^1.0.8",
+		"socket.io": "^4.7.5"
+	},
+  "devDependencies": {
+		"nodemon": "^3.1.0"
+  }
+}

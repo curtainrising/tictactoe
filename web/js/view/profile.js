@@ -14,10 +14,10 @@ window.ProfileView = Backbone.View.extend({
 	render: function() {
 		this.$el.append(this.template());
 		var self = this;
-		for(var i in config.currentPlayableGames){
+		for(var i in config.common.currentPlayableGames){
 			var data = {
 				type : i,
-				name : config.currentPlayableGames[i]
+				name : config.common.currentPlayableGames[i]
 			};
 			$("#profile-game-stats-choose-game",this.$el).append(this.gameChoiceOptionTemplate(data));
 		}

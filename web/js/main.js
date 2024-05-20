@@ -1,6 +1,7 @@
 var AppRouter = Backbone.Router.extend({
 	id: "logged-out-home",
 	initialize: function () {
+    this.setupConfig();
 		this.user = null;
 		if(document.cookie){
 			var token = this.getCookie('token');
@@ -15,6 +16,31 @@ var AppRouter = Backbone.Router.extend({
 		this.height = $(window).height();
 		console.log(this.height);
 	},
+  setupConfig: function() {
+    var env;
+    console.log('hostname', window.location.hostname)
+    switch( window.location.hostname ){
+      case "localhost":
+      case "127.0.0.1":
+        env = 'local';
+        break;
+      case "dev.yourdomain.com":
+        env = 'dev';
+        break;
+      case "yourdomain.com":
+        env = 'production';
+        break;
+      default:
+        throw('Unknown environment: ' + window.location.hostname );
+    }
+    console.log('config', config)
+    console.log('env', env)
+    console.log('config[env]', config[env])
+    this.config = {
+      ...config.common,
+      ...config[env],
+    }
+  },
 	setupLoggedOutHome: function(){
 		this.homeView = new HomeLoggedOutView();
 		$(".header").append(this.homeView.render().$el);
@@ -54,7 +80,8 @@ var AppRouter = Backbone.Router.extend({
 		});
 	},
 	apiUrl: function(){
-		return "http://" + config.baseUrl + ":" + config.apiPort;
+    console.log('config', this.config);
+		return "http://" + this.config.baseUrl + ":" + this.config.apiPort;
 	},
 	logOut: function() {
 		document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
@@ -85,6 +112,9 @@ var AppRouter = Backbone.Router.extend({
 		this.homeView = new HomeLoggedInView();
 		$(".header").append(this.homeView.render().$el);
 		this.socket = io.connect(app.apiUrl(), {query: "id=" + this.user.id});
+    this.socket.on("connect_error", (err) => {
+      console.log(`connect_error due to ${err.message}`);
+    });
 	},
 	randomString: function(length){
 		var carrier = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUWXYZ";
