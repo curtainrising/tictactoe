@@ -3,11 +3,11 @@ var config = {
     baseUrl : 'localhost',
   },
   dev: {
-	  baseUrl : "dtictactoe-s.sammedalen.com",
+	  baseUrl : "d-tic-api.yourdomain.com",
   },
   production: {
 
-	  baseUrl : "tictactoe-s.sammedalen.com",
+	  baseUrl : "tic-api.yourdomain.com",
   },
   common: {
     apiPort : 8082,

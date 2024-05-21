@@ -4,7 +4,7 @@ var config = require("../config/sammedalen.com");
 
 var start = function() {
 	var deferred = Q.defer();
-	amqp.connect(config.rabbitMQHost, function(err, conn){
+	amqp.connect(process.env.RABBITMQ_URL || config.rabbitMQHost, function(err, conn){
 		connection = conn;
 		for(var i in config.queueNames){
 			consumingChannelTasks[config.queueNames[i]] = [];

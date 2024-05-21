@@ -6,7 +6,9 @@
 	"version": "0.0.1",
 	"private": true,
   "scripts": {
-    "start-dev": "MONGO_USER=root MONGO_PASS=example nodemon app.js"
+    "start-dev": "MONGO_USER=root MONGO_PASS=example node app.js",
+    "start-local": "MONGO_USER=root MONGO_PASS=example nodemon app.js",
+    "start": "node app.js"
   },
 	"dependencies": {
 		"amqplib": "^0.10.4",

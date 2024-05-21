@@ -33,9 +33,6 @@ var AppRouter = Backbone.Router.extend({
       default:
         throw('Unknown environment: ' + window.location.hostname );
     }
-    console.log('config', config)
-    console.log('env', env)
-    console.log('config[env]', config[env])
     this.config = {
       ...config.common,
       ...config[env],

@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  web:
+    ports:
+      - 8080:8080
+    build:
+      dockerfile: Dockerfile
+      context: "./web"
+    network_mode: service:mongo
+    command: [bash, -c, "sleep 10; npm run start-dev"]
+  server:
+    ports:
+      - 8082:8082
+    build:
+      dockerfile: Dockerfile
+      context: "./server"
+    environment:
+      MONGO_URL: mongodb://mongo:27017/textdb
+      MONGO_USER: root
+      MONGO_PASS: example
+    network_mode: service:mongo
+    command: [bash, -c, "sleep 10; npm run start-dev"]

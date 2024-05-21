@@ -20,9 +20,6 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017
-  redis:
-    image: redis
-    network_mode: service:mongo
   rabbitmq:
     image: rabbitmq:3-management
     network_mode: service:mongo
@@ -31,7 +28,7 @@ services:
       dockerfile: Dockerfile
       context: "./web"
     network_mode: service:mongo
-    command: bash -c "sleep 10; npm start"
+    command: [bash, -c, "sleep 10; npm run start-dev"]
   server:
     build:
       dockerfile: Dockerfile
@@ -41,4 +38,4 @@ services:
       MONGO_USER: root
       MONGO_PASS: example
     network_mode: service:mongo
-    command: bash -c "sleep 10; npm start-dev"
+    command: [bash, -c, "sleep 10; npm run start-dev"]
